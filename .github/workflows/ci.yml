@@ -28,7 +28,7 @@ jobs:
           New-BCContainer `
             -accept_eula `
             -containerName $Env:BC_CONTAINER_NAME `
-            -artifactUrl (Get-BcArtifactUrl -type sandbox) `
+            -artifactUrl https://bcartifacts.azureedge.net/sandbox/22.3.58346.58734/w1 `
             -alwaysPull `
             -auth NavUserPassword `
             -credential ([PSCredential]::new($Env:BC_CONTAINER_USERNAME, (ConvertTo-SecureString -String $Env:BC_CONTAINER_PASSWORD -AsPlainText -Force))) `
