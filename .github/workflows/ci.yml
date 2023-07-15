@@ -21,6 +21,28 @@ jobs:
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
 
+      - name: Install BcContainerHelper
+        shell: powershell
+        run: Install-Module BcContainerHelper -Force
+
+      - name: Set up Business Central container
+        shell: powershell
+        run: |
+          New-BCContainer `
+            -accept_eula `
+            -containerName $Env:BC_CONTAINER_NAME `
+            -artifactUrl https://bcartifacts.azureedge.net/sandbox/22.3.58346.58734/w1 `
+            -alwaysPull `
+            -auth NavUserPassword `
+            -credential ([PSCredential]::new($Env:BC_CONTAINER_USERNAME, (ConvertTo-SecureString -String $Env:BC_CONTAINER_PASSWORD -AsPlainText -Force))) `
+            -updateHosts `
+            -enableTaskScheduler:$false `
+            -includeTestFrameworkOnly `
+            -includeTestLibrariesOnly `
+            -includePerformanceToolkit `
+            -additionalParameters @("--volume $Env:GITHUB_WORKSPACE\`:c:\project") `
+            -includeAL
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
