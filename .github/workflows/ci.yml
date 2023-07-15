@@ -16,11 +16,14 @@ jobs:
       BC_CONTAINER_USERNAME: admin
       BC_CONTAINER_PASSWORD: P@ssword1
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
 
-      - run: Install-Module BcContainerHelper -Force
-      - run: Import-Module BcContainerHelper
-      - run: Check-BcContainerHelperPermissions -Fix
+      - name: Install BcContainerHelper
+        shell: powershell
+        run: Install-Module BcContainerHelper -Force
 
       - name: Set up Business Central container
         shell: powershell
