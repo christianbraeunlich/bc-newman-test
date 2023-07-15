@@ -47,5 +47,5 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm install -g newman newman-reporter-junit newman-reporter-htmlextra newman-reporter-htmlextra-rtl newman-reporter-htmlextra-dark newman-reporter-htmlextra-light newman-reporter-htmlextra-minimal newman-reporter-htmlextra-silent
+      - run: npm install -g newman newman-reporter-junit newman-reporter-htmlextra
       - run: newman run postman/Business Central API v2.0.postman_collection.json -e postman/BusinessCentral.postman_environment.json --reporters cli,junit --reporter-junit-export junitReport.xml
