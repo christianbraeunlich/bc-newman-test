@@ -26,4 +26,4 @@ jobs:
           node-version: 18
 
       - run: npm install -g newman
-      - run: newman run "postman/Business Central API v2.0.postman_collection.json" -e "postman/BusinessCentral.postman_environment.json" --reporters cli,junit --reporter-junit-export junitReport.xml
+      - run: newman run "postman/Business Central API v2.0.postman_collection.json" -e "postman/BusinessCentral.postman_environment.json"
