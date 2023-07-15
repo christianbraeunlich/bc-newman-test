@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: windows-2019
     env:
-      BC_CONTAINER_NAME: bcdev
+      BC_CONTAINER_NAME: bcserver
       BC_CONTAINER_USERNAME: admin
       BC_CONTAINER_PASSWORD: P@ssword1
     steps:
