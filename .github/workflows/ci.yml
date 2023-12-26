@@ -31,15 +31,12 @@ jobs:
           New-BCContainer `
             -accept_eula `
             -containerName $Env:BC_CONTAINER_NAME `
-            -artifactUrl https://bcartifacts.azureedge.net/sandbox/22.3.58346.58734/w1 `
+            -artifactUrl (Get-BCArtifactUrl -type Sandbox -country $country -version $version -doNotCheckPlatform:$doNotCheckPlatform) `
             -alwaysPull `
             -auth NavUserPassword `
             -credential ([PSCredential]::new($Env:BC_CONTAINER_USERNAME, (ConvertTo-SecureString -String $Env:BC_CONTAINER_PASSWORD -AsPlainText -Force))) `
             -updateHosts `
             -enableTaskScheduler:$false `
-            -includeTestFrameworkOnly `
-            -includeTestLibrariesOnly `
-            -includePerformanceToolkit `
             -additionalParameters @("--volume $Env:GITHUB_WORKSPACE\`:c:\project") `
             -includeAL
 
